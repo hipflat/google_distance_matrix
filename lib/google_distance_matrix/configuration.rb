@@ -63,6 +63,8 @@ module GoogleDistanceMatrix
         out << ['key', api_key]
       end
 
+      out << ['sensor', false]
+
       out
     end
 
