@@ -10,6 +10,7 @@ module GoogleDistanceMatrix
 
     def get(url, options = {})
       uri = URI.parse url
+      puts url
       instrumentation = {url: url}.merge(options[:instrumentation] || {})
 
       response = ActiveSupport::Notifications.instrument "client_request_matrix_data.google_distance_matrix", instrumentation do
