@@ -13,6 +13,7 @@ module GoogleDistanceMatrix
       instrumentation = {url: url}.merge(options[:instrumentation] || {})
 
       response = ActiveSupport::Notifications.instrument "client_request_matrix_data.google_distance_matrix", instrumentation do
+        resp = nil
         req = Net::HTTP::Get.new(uri.path)
         sock = Net::HTTP.new(uri.host, 443)
         sock.use_ssl = true
