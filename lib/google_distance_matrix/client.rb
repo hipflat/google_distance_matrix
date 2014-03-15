@@ -10,12 +10,11 @@ module GoogleDistanceMatrix
 
     def get(url, options = {})
       uri = URI.parse url
-      puts url
       instrumentation = {url: url}.merge(options[:instrumentation] || {})
 
       response = ActiveSupport::Notifications.instrument "client_request_matrix_data.google_distance_matrix", instrumentation do
         resp = nil
-        req = Net::HTTP::Get.new(uri.path)
+        req = Net::HTTP::Get.new(uri.request_uri)
         sock = Net::HTTP.new(uri.host, 443)
         sock.use_ssl = true
         sock.ssl_version = "SSLv3"
