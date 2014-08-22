@@ -72,7 +72,7 @@ module GoogleDistanceMatrix
     end
 
 
-    # Public: Finds shortes route by distance to a place.
+    # Public: Finds shortest route by distance to a place.
     #
     # place - The place, or object place was built from, you want the shortest route to
     #
@@ -81,8 +81,18 @@ module GoogleDistanceMatrix
       routes = routes_for place_or_object_place_was_built_from
       select_ok_routes(routes).min_by &:distance_in_meters
     end
+    
+    # Public: Finds longest route by distance to a place.
+    #
+    # place - The place, or object place was built from, you want the longest route to
+    #
+    # Returns shortest route, or nil if no routes had status ok
+    def longest_route_by_distance_to(place_or_object_place_was_built_from)
+      routes = routes_for place_or_object_place_was_built_from
+      select_ok_routes(routes).max_by &:distance_in_meters
+    end    
 
-    # Public: Finds shortes route by distance to a place.
+    # Public: Finds shortest route by distance to a place.
     #
     # place - The place, or object place was built from, you want the shortest route to
     #
@@ -90,8 +100,17 @@ module GoogleDistanceMatrix
     def shortest_route_by_distance_to!(place_or_object_place_was_built_from)
       routes_for!(place_or_object_place_was_built_from).min_by &:distance_in_meters
     end
+    
+    # Public: Finds longest route by distance to a place.
+    #
+    # place - The place, or object place was built from, you want the longest route to
+    #
+    # Returns longest route, fails if any of the routes are not ok
+    def longest_route_by_distance_to!(place_or_object_place_was_built_from)
+      routes_for!(place_or_object_place_was_built_from).max_by &:distance_in_meters
+    end
 
-    # Public: Finds shortes route by duration to a place.
+    # Public: Finds shortest route by duration to a place.
     #
     # place - The place, or object place was built from, you want the shortest route to
     #
@@ -101,7 +120,17 @@ module GoogleDistanceMatrix
       select_ok_routes(routes).min_by &:duration_in_seconds
     end
 
-    # Public: Finds shortes route by duration to a place.
+    # Public: Finds longest route by duration to a place.
+    #
+    # place - The place, or object place was built from, you want the longest route to
+    #
+    # Returns shortest route, or nil if no routes had status ok
+    def longest_route_by_duration_to(place_or_object_place_was_built_from)
+      routes = routes_for place_or_object_place_was_built_from
+      select_ok_routes(routes).max_by &:duration_in_seconds
+    end
+
+    # Public: Finds shortest route by duration to a place.
     #
     # place - The place, or object place was built from, you want the shortest route to
     #
@@ -110,8 +139,14 @@ module GoogleDistanceMatrix
       routes_for!(place_or_object_place_was_built_from).min_by &:duration_in_seconds
     end
 
-
-
+    # Public: Finds longest route by duration to a place.
+    #
+    # place - The place, or object place was built from, you want the longest route to
+    #
+    # Returns shortest route, fails if any of the routes are not ok
+    def longest_route_by_duration_to!(place_or_object_place_was_built_from)
+      routes_for!(place_or_object_place_was_built_from).max_by &:duration_in_seconds
+    end
 
     private
 
